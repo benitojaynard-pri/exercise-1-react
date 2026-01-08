@@ -1,5 +1,5 @@
 import { posts as data } from "../data/posts";
-import { generateId } from ".src/util.js";
+import { generateId } from "../utils";
 
 // Private local state
 let posts = [...data];

@@ -13,9 +13,12 @@ import {
     addComment,
 } from "./services/comments.js";
 
-import { getPosts, addPost, updatePost, deletePostBy } from "./posts.js";
-
-import { addUser, getUsers } from "./users.js";
+import {
+    getPosts,
+    addPost,
+    updatePost,
+    getPostById,
+} from "./services/posts.js";
 
 const newUser = addUser({
     name: "Juan Dela Cruz",
@@ -24,7 +27,6 @@ const newUser = addUser({
 });
 
 console.log("New User Created:", newUser);
-console.log("Current User List:", getUsers());
 
 // Test adding a post
 const myNewPost = addPost({

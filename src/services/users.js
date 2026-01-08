@@ -1,5 +1,5 @@
 import { users as data } from "../data/users";
-import { generateId } from ".src/util.js";
+import { generateId } from "../utils";
 
 //private
 let users = [...data];
