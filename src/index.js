@@ -13,6 +13,30 @@ import {
     addComment,
 } from "./services/comments.js";
 
+import { getPosts, addPost, updatePost, deletePostBy } from "./posts.js";
+
+import { addUser, getUsers } from "./users.js";
+
+const newUser = addUser({
+    name: "Juan Dela Cruz",
+    email: "juan@example.com",
+    role: "Admin",
+});
+
+console.log("New User Created:", newUser);
+console.log("Current User List:", getUsers());
+
+// Test adding a post
+const myNewPost = addPost({
+    userId: 1,
+    title: "New Blog Post",
+    body: "This is the content.",
+});
+console.log("All Posts (Newest first):", getPosts());
+
+// Test partial update
+updatePost(myNewPost.id, { title: "Updated Title Only" });
+console.log("Updated Post:", getPostById(myNewPost.id));
 updateUser(3, { email: "jaynard@soft.en" });
 
 console.log(addUser());

@@ -1,41 +1,56 @@
 import { posts as data } from "../data/posts";
+import { generateId } from ".src/util.js";
 
-//private
+// Private local state
 let posts = [...data];
 
-function getPosts() {
-  //get all posts
+export function getPosts() {
+    return posts;
 }
 
-function getPostsByUser(userId) {
-  //get all posts by userId
+export function getPostsByUser(userId) {
+    return posts.filter((post) => post.userId === userId);
 }
 
-function getPostById(id) {
-  //get a single post by id
+export function getPostById(id) {
+    return posts.find((post) => post.id === id);
 }
 
-function addPost(post) {
-  //add new post to BEGINNING of posts array
-  // use generateId function and pass posts array as the argument to generate a unique id.
+export function addPost(post) {
+    const newPost = {
+        ...post,
+        id: generateId(posts),
+    };
+    // Add to the BEGINNING of the array
+    posts = [newPost, ...posts];
+    return newPost;
 }
 
-function updatePostTitle(id, title) {
-  //update post title
+export function updatePostTitle(id, title) {
+    posts = posts.map((post) =>
+        post.id === id ? { ...post, title: title } : post
+    );
+    return getPostById(id);
 }
 
-function updatePostBody(id, body) {
-  //update post body
+export function updatePostBody(id, body) {
+    posts = posts.map((post) =>
+        post.id === id ? { ...post, body: body } : post
+    );
+    return getPostById(id);
 }
 
-function updatePost(id, post) {
-  //update post title and or body (imagine a form where user is allowed to edit both title and post but may also choose to only edit one of them)
+export function updatePost(id, updatedFields) {
+    posts = posts.map((post) =>
+        post.id === id ? { ...post, ...updatedFields } : post
+    );
+    return getPostById(id);
 }
 
-function deletePostBy(id) {
-  //delete post by id
+export function deletePostBy(id) {
+    posts = posts.filter((post) => post.id !== id);
 }
 
-function deletePostsByUserId(userId) {
-  //delete all posts of a user by given userId
+export function deletePostsByUserId(userId) {
+    posts = posts.filter((post) => post.userId !== userId);
 }
